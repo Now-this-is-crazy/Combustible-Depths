@@ -1,0 +1,9 @@
+{
+  "parent": "combustible_depths:block/ignite_block",
+  "textures": {
+    "top": "combustible_depths:block/ignite_top",
+    "top_emissive": "combustible_depths:block/ignite_top_emissive",
+    "side": "combustible_depths:block/ignite",
+    "side_emissive": "combustible_depths:block/ignite_emissive"
+  }
+}

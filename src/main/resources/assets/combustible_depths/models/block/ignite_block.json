@@ -1,0 +1,43 @@
+{
+  "parent": "minecraft:block/block",
+	"textures": {
+		"particle": "#side"
+	},
+	"elements": [
+		{
+			"from": [0, 0, 0],
+			"to": [16, 16, 16],
+			"faces": {
+				"north": {"uv": [0, 0, 16, 16], "texture": "#side", "cullface": "north"},
+				"east": {"uv": [0, 0, 16, 16], "texture": "#side", "cullface": "east"},
+				"south": {"uv": [0, 0, 16, 16], "texture": "#side", "cullface": "south"},
+				"west": {"uv": [0, 0, 16, 16], "texture": "#side", "cullface": "west"},
+				"up": {"uv": [0, 0, 16, 16], "texture": "#top", "cullface": "up"},
+				"down": {"uv": [0, 0, 16, 16], "texture": "#top", "cullface": "down"}
+			}
+		},
+		{
+			"from": [0, 0, 0],
+			"to": [16, 16, 16],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 8, 8]},
+            "shade": false,
+            "light_emission": 7,
+			"faces": {
+				"north": {"uv": [0, 0, 16, 16], "texture": "#side_emissive", "cullface": "north"},
+				"east": {"uv": [0, 0, 16, 16], "texture": "#side_emissive", "cullface": "east"},
+				"south": {"uv": [0, 0, 16, 16], "texture": "#side_emissive", "cullface": "south"},
+				"west": {"uv": [0, 0, 16, 16], "texture": "#side_emissive", "cullface": "west"},
+				"up": {"uv": [0, 0, 16, 16], "texture": "#top_emissive", "cullface": "up"},
+				"down": {"uv": [0, 0, 16, 16], "texture": "#top_emissive", "cullface": "down"}
+			}
+		}
+	],
+	"groups": [
+		{
+			"name": "base",
+			"origin": [8, 8, 8],
+			"color": 0,
+			"children": [0, 1]
+		}
+	]
+}

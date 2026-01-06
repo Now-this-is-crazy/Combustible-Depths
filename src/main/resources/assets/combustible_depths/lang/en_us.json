@@ -1,0 +1,11 @@
+{
+  "item.combustible_depths.ignite": "Ignite",
+  "item.combustible_depths.soul_ignite": "Soul Ignite",
+
+  "block.combustible_depths.ignite": "Ignite",
+  "block.combustible_depths.soul_ignite": "Soul Ignite",
+
+  "subtitles.combustible_depths.ignite.ignite": "Ignite ignites",
+  "subtitles.combustible_depths.ignite.charge": "Ignite charges",
+  "subtitles.combustible_depths.ignite.explode": "Ignite explodes"
+}

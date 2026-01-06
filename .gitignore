@@ -1,0 +1,6 @@
+/run/
+/src/main/generated/.cache/
+/.gradle/
+/build/
+/.idea/
+/.noai

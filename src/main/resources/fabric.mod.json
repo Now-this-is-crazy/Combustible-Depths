@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "id": "combustible_depths",
+  "version": "${version}",
+  "name": "combustible_depths",
+  "description": "A mod that adds 2 new explosive blocks to the Nether to make Netherite mining more fun.",
+  "authors": [
+    "Powercyphe",
+    "oPixeel"
+  ],
+  "contact": {
+    "homepage": "https://modrinth.com/mod/combustible-depths",
+    "sources": "https://github.com/Now-this-is-crazy/Combustible-Depths"
+  },
+  "license": "MIT",
+  "icon": "assets/combustible_depths/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "powercyphe.combustible_depths.common.CombustibleDepths"
+    ],
+    "client": [
+      "powercyphe.combustible_depths.client.CombustibleDepthsClient"
+    ]
+  },
+  "mixins": [
+    "combustible_depths.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": "${minecraft_version}"
+  },
+  "custom": {
+    "modmenu": {
+      "links": {
+        "modmenu.discord": "https://discord.gg/Dmp2dbyNrs"
+      }
+    }
+  }
+}

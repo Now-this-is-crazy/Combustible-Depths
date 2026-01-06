@@ -1,0 +1,38 @@
+{
+  "ignite.ignite": {
+    "subtitle": "subtitles.combustible_depths.ignite.ignite",
+    "sounds": [
+      "fire/ignite"
+    ]
+  },
+  "ignite.charge": {
+    "subtitle": "subtitles.combustible_depths.ignite.charge",
+    "sounds": [
+      "combustible_depths:ignite_charge"
+    ]
+  },
+  "ignite.explode": {
+    "subtitle": "subtitles.combustible_depths.ignite.explode",
+    "sounds": [
+      "combustible_depths:ignite_explode"
+    ]
+  },
+  "ignite.explode_far": {
+    "subtitle": "subtitles.combustible_depths.ignite.explode",
+    "sounds": [
+      "combustible_depths:ignite_explode_far"
+    ]
+  },
+  "ignite.shard_land": {
+    "sounds": [
+      "combustible_depths:shard/ignite_shard_land1",
+      "combustible_depths:shard/ignite_shard_land2",
+      "combustible_depths:shard/ignite_shard_land3",
+      "combustible_depths:shard/ignite_shard_land4",
+      "combustible_depths:shard/ignite_shard_land5",
+      "combustible_depths:shard/ignite_shard_land6",
+      "combustible_depths:shard/ignite_shard_land7"
+
+    ]
+  }
+}
