@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "SGS",
+    "GCG",
+    "SGS"
+  ],
+  "key": {
+    "S": "minecraft:soul_sand",
+    "G": "minecraft:gunpowder",
+    "C": "minecraft:fire_charge"
+  },
+  "result": {
+    "id": "combustible_depths:soul_ignite",
+    "count": 2
+  }
+}

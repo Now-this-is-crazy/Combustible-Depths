@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "FGF",
+    "GCG",
+    "FGF"
+  ],
+  "key": {
+    "F": "minecraft:flint",
+    "G": "minecraft:gunpowder",
+    "C": "minecraft:fire_charge"
+  },
+  "result": {
+    "id": "combustible_depths:ignite",
+    "count": 2
+  }
+}
