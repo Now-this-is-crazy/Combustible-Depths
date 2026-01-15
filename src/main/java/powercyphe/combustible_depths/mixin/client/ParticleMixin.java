@@ -1,4 +1,4 @@
-package powercyphe.combustible_depths.mixin;
+package powercyphe.combustible_depths.mixin.client;
 
 import com.llamalad7.mixinextras.expression.Definition;
 import com.llamalad7.mixinextras.expression.Expression;

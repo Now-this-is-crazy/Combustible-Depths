@@ -4,8 +4,6 @@ import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.BlockRenderLayerMap;
-import net.fabricmc.fabric.api.renderer.v1.mesh.QuadAtlas;
-import net.fabricmc.fabric.api.renderer.v1.mesh.QuadEmitter;
 import net.minecraft.client.renderer.chunk.ChunkSectionLayer;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import powercyphe.combustible_depths.client.particle.IgniteExplosionParticle;
@@ -31,10 +29,5 @@ public class CombustibleDepthsClient implements ClientModInitializer {
         ParticleFactoryRegistry.getInstance().register(CDParticles.SOUL_IGNITE_SHARD, IgniteShardParticle.Provider::new);
 
         ClientPlayNetworking.registerGlobalReceiver(IgniteExplosionPayload.TYPE, new IgniteExplosionPayload.Receiver());
-    }
-
-    public static QuadEmitter modify(QuadEmitter emitter) {
-        emitter = emitter.atlas(QuadAtlas.ITEM);
-        return emitter;
     }
 }

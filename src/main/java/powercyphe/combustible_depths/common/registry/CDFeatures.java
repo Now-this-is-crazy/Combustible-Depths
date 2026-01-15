@@ -14,14 +14,13 @@ import java.util.function.Predicate;
 
 public class CDFeatures {
 
-    public static ResourceKey<PlacedFeature> ORE_IGNITE_LOWER = register("ore_ignite_lower");
-    public static ResourceKey<PlacedFeature> ORE_IGNITE_UPPER = register("ore_ignite_upper");
+    public static final ResourceKey<PlacedFeature> ORE_IGNITE_LOWER = register("ore_ignite_lower");
+    public static final ResourceKey<PlacedFeature> ORE_IGNITE_UPPER = register("ore_ignite_upper");
 
-    public static ResourceKey<PlacedFeature> ORE_SOUL_IGNITE_LOWER = register("ore_soul_ignite_lower");
-    public static ResourceKey<PlacedFeature> ORE_SOUL_IGNITE_UPPER = register("ore_soul_ignite_upper");
+    public static final ResourceKey<PlacedFeature> ORE_SOUL_IGNITE_LOWER = register("ore_soul_ignite_lower");
+    public static final ResourceKey<PlacedFeature> ORE_SOUL_IGNITE_UPPER = register("ore_soul_ignite_upper");
 
     public static final Predicate<BiomeSelectionContext> NETHER_NON_SOUL_SAND_VALLEY = BiomeSelectors.foundInTheNether().and(BiomeSelectors.excludeByKey(Biomes.SOUL_SAND_VALLEY));
-
     public static final Predicate<BiomeSelectionContext> NETHER_SOUL_SAND_VALLEY = BiomeSelectors.foundInTheNether().and(BiomeSelectors.includeByKey(Biomes.SOUL_SAND_VALLEY));
 
     public static void init() {

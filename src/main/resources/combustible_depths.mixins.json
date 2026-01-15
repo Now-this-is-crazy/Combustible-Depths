@@ -9,8 +9,7 @@
   "mixins": [
   ],
   "client": [
-    "ParticleMixin",
-    "client.TerrainRenderContextMixin"
+    "client.ParticleMixin"
   ],
   "injectors": {
     "defaultRequire": 1
