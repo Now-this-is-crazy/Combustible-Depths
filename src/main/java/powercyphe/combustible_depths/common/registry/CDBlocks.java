@@ -36,12 +36,11 @@ public class CDBlocks {
 
     public static void init() {
         ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.NATURAL_BLOCKS)
-                .register(entries -> {
-                    entries.addAfter(Blocks.SMOOTH_BASALT,
-                            IGNITE,
-                            SOUL_IGNITE
-                    );
-                });
+                .register(entries ->
+                        entries.addAfter(Blocks.SMOOTH_BASALT,
+                                IGNITE,
+                                SOUL_IGNITE
+                ));
     }
 
     public static Block register(String id, Function<BlockBehaviour.Properties, Block> blockFunction, BlockBehaviour.Properties properties) {

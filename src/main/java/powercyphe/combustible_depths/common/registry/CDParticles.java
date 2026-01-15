@@ -10,11 +10,11 @@ import powercyphe.combustible_depths.common.CombustibleDepths;
 
 public class CDParticles {
 
-    public static ParticleType<SimpleParticleType> IGNITE_EXPLOSION = register("ignite_explosion", FabricParticleTypes.simple());
-    public static ParticleType<SimpleParticleType> SOUL_IGNITE_EXPLOSION = register("soul_ignite_explosion", FabricParticleTypes.simple());
+    public static final ParticleType<SimpleParticleType> IGNITE_EXPLOSION = register("ignite_explosion", FabricParticleTypes.simple());
+    public static final ParticleType<SimpleParticleType> SOUL_IGNITE_EXPLOSION = register("soul_ignite_explosion", FabricParticleTypes.simple());
 
-    public static ParticleType<SimpleParticleType> IGNITE_SHARD = register("ignite_shard", FabricParticleTypes.simple());
-    public static ParticleType<SimpleParticleType> SOUL_IGNITE_SHARD = register("soul_ignite_shard", FabricParticleTypes.simple());
+    public static final ParticleType<SimpleParticleType> IGNITE_SHARD = register("ignite_shard", FabricParticleTypes.simple());
+    public static final ParticleType<SimpleParticleType> SOUL_IGNITE_SHARD = register("soul_ignite_shard", FabricParticleTypes.simple());
 
     public static void init() {}
 

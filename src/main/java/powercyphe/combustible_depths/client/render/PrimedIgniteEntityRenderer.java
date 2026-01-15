@@ -36,8 +36,9 @@ public class PrimedIgniteEntityRenderer extends EntityRenderer<PrimedIgniteEntit
                     entity.shakiness.y() * sin,
                     entity.shakiness.z() * sin
             );
+        } else {
+            state.shakiness = Vec3.ZERO;
         }
-
     }
 
     @Override
