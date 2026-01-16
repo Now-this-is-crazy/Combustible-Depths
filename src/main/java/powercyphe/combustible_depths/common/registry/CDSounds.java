@@ -3,7 +3,7 @@ package powercyphe.combustible_depths.common.registry;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import powercyphe.combustible_depths.common.CombustibleDepths;
 
@@ -20,7 +20,7 @@ public class CDSounds {
     public static void init() {}
 
     public static Holder<SoundEvent> register(String name) {
-        Identifier id = CombustibleDepths.id(name);
+        ResourceLocation id = CombustibleDepths.id(name);
         return Registry.registerForHolder(BuiltInRegistries.SOUND_EVENT, id, SoundEvent.createVariableRangeEvent(id));
     }
 }

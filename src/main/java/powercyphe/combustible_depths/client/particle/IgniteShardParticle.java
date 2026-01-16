@@ -2,10 +2,7 @@ package powercyphe.combustible_depths.client.particle;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.client.particle.Particle;
-import net.minecraft.client.particle.ParticleProvider;
-import net.minecraft.client.particle.SingleQuadParticle;
-import net.minecraft.client.particle.SpriteSet;
+import net.minecraft.client.particle.*;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.core.BlockPos;
@@ -18,13 +15,14 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.Nullable;
 import powercyphe.combustible_depths.common.registry.CDSounds;
 
-public class IgniteShardParticle extends SingleQuadParticle {
+public class IgniteShardParticle extends TextureSheetParticle {
     private boolean playedHitSound = false;
 
     public IgniteShardParticle(ClientLevel clientLevel, double x, double y, double z, double velocityX, double velocityY, double velocityZ, RandomSource random, TextureAtlasSprite sprite) {
-        super(clientLevel, x, y, z, sprite);
+        super(clientLevel, x, y, z);
 
         this.xd = velocityX;
         this.yd = velocityY;
@@ -38,6 +36,7 @@ public class IgniteShardParticle extends SingleQuadParticle {
         this.quadSize = 0.13F + random.nextFloat() * 0.11F;
 
         this.tick();
+        this.setSprite(sprite);
     }
 
     @Override
@@ -65,7 +64,7 @@ public class IgniteShardParticle extends SingleQuadParticle {
                 BlockPos blockPos = this.getBlockPos();
                 FluidState fluid = this.level.getFluidState(blockPos);
                 if (fluid.is(FluidTags.LAVA)) {
-                    AABB box = fluid.getAABB(this.level, blockPos);
+                    AABB box = fluid.getShape(this.level, blockPos).bounds();
 
                     if (box != null && box.intersects(this.getBoundingBox())) {
                         Vec3 lavaPos = this.getTopOfLava();
@@ -104,7 +103,7 @@ public class IgniteShardParticle extends SingleQuadParticle {
 
         if (fluid != null) {
             blockPos = blockPos.below();
-            AABB box = fluid.getAABB(this.level, blockPos);
+            AABB box = fluid.getShape(this.level, blockPos).bounds();
 
             if (box != null) {
                 return new Vec3(this.x, blockPos.getY() + (box.maxY - box.minY), this.z);
@@ -116,14 +115,14 @@ public class IgniteShardParticle extends SingleQuadParticle {
     }
 
     @Override
-    protected Layer getLayer() {
-        return Layer.TRANSLUCENT;
+    public ParticleRenderType getRenderType() {
+        return ParticleRenderType.PARTICLE_SHEET_TRANSLUCENT;
     }
 
     public record Provider(SpriteSet sprites) implements ParticleProvider<SimpleParticleType> {
         @Override
-        public Particle createParticle(SimpleParticleType simpleParticleType, ClientLevel clientLevel, double x, double y, double z,
-                                       double velocityX, double velocityY, double velocityZ, RandomSource randomSource) {
+        public @Nullable Particle createParticle(SimpleParticleType particleOptions, ClientLevel clientLevel, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
+            RandomSource randomSource = RandomSource.create();
             return new IgniteShardParticle(clientLevel, x, y, z, velocityX, velocityY, velocityZ, randomSource, this.sprites.get(randomSource));
         }
     }

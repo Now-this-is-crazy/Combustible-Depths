@@ -15,6 +15,7 @@
   "license": "MIT",
   "icon": "assets/combustible_depths/icon.png",
   "environment": "*",
+  "accessWidener": "combustible_depths.accesswidener",
   "entrypoints": {
     "main": [
       "powercyphe.combustible_depths.common.CombustibleDepths"

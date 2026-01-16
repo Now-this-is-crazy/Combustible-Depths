@@ -1,11 +1,11 @@
 package powercyphe.combustible_depths.client;
 
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
-import net.fabricmc.fabric.api.client.rendering.v1.BlockRenderLayerMap;
-import net.minecraft.client.renderer.chunk.ChunkSectionLayer;
-import net.minecraft.client.renderer.entity.EntityRenderers;
+import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
+import net.minecraft.client.renderer.RenderType;
 import powercyphe.combustible_depths.client.particle.IgniteExplosionParticle;
 import powercyphe.combustible_depths.client.particle.IgniteShardParticle;
 import powercyphe.combustible_depths.client.render.PrimedIgniteEntityRenderer;
@@ -18,9 +18,9 @@ public class CombustibleDepthsClient implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
-        BlockRenderLayerMap.putBlocks(ChunkSectionLayer.CUTOUT, CDBlocks.IGNITE, CDBlocks.SOUL_IGNITE);
+        BlockRenderLayerMap.INSTANCE.putBlocks(RenderType.cutout(), CDBlocks.IGNITE, CDBlocks.SOUL_IGNITE);
 
-        EntityRenderers.register(CDEntities.PRIMED_IGNITE, PrimedIgniteEntityRenderer::new);
+        EntityRendererRegistry.register(CDEntities.PRIMED_IGNITE, PrimedIgniteEntityRenderer::new);
 
         ParticleFactoryRegistry.getInstance().register(CDParticles.IGNITE_EXPLOSION, IgniteExplosionParticle.Provider::new);
         ParticleFactoryRegistry.getInstance().register(CDParticles.SOUL_IGNITE_EXPLOSION, IgniteExplosionParticle.Provider::new);

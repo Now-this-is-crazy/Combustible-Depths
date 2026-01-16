@@ -20,6 +20,6 @@ public class CDEntities {
 
     public static <T extends Entity> EntityType<T> register(String id, EntityType.Builder<T> entityType) {
         ResourceKey<EntityType<?>> entityKey = ResourceKey.create(Registries.ENTITY_TYPE, CombustibleDepths.id(id));
-        return Registry.register(BuiltInRegistries.ENTITY_TYPE, entityKey, entityType.build(entityKey));
+        return Registry.register(BuiltInRegistries.ENTITY_TYPE, entityKey, entityType.build(id));
     }
 }

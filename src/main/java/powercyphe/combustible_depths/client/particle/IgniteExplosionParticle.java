@@ -27,8 +27,8 @@ public class IgniteExplosionParticle extends HugeExplosionParticle {
         }
 
         @Override
-        public Particle createParticle(SimpleParticleType simpleParticleType, ClientLevel clientLevel, double d, double e, double f, double g, double h, double i, RandomSource randomSource) {
-            return new IgniteExplosionParticle(clientLevel, d, e, f, g, randomSource, this.sprites);
+        public Particle createParticle(SimpleParticleType simpleParticleType, ClientLevel clientLevel, double d, double e, double f, double g, double h, double i) {
+            return new IgniteExplosionParticle(clientLevel, d, e, f, g, RandomSource.create(), this.sprites);
         }
     }
 }

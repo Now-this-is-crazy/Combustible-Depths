@@ -7,6 +7,7 @@
   "package": "powercyphe.combustible_depths.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
+    "accessor.BlockStateBaseAccessor"
   ],
   "client": [
     "client.ParticleMixin"

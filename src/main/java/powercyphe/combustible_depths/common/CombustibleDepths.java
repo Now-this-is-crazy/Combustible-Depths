@@ -2,7 +2,7 @@ package powercyphe.combustible_depths.common;
 
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import powercyphe.combustible_depths.common.payload.IgniteExplosionPayload;
 import powercyphe.combustible_depths.common.registry.*;
 
@@ -20,7 +20,7 @@ public class CombustibleDepths implements ModInitializer {
         PayloadTypeRegistry.playS2C().register(IgniteExplosionPayload.TYPE, IgniteExplosionPayload.CODEC);
     }
 
-    public static Identifier id(String path) {
-        return Identifier.fromNamespaceAndPath(MOD_ID, path);
+    public static ResourceLocation id(String path) {
+        return ResourceLocation.tryBuild(MOD_ID, path);
     }
 }

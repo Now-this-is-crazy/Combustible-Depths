@@ -1,10 +1,11 @@
 package powercyphe.combustible_depths.common.entity;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.particles.ExplosionParticleInfo;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtUtils;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
@@ -13,7 +14,6 @@ import net.minecraft.server.level.ServerEntity;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.util.random.WeightedList;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntitySelector;
@@ -21,11 +21,8 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.storage.ValueInput;
-import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
-import org.jspecify.annotations.Nullable;
 import powercyphe.combustible_depths.common.block.IgniteBlock;
 import powercyphe.combustible_depths.common.payload.IgniteExplosionPayload;
 import powercyphe.combustible_depths.common.registry.CDBlocks;
@@ -84,10 +81,7 @@ public class PrimedIgniteEntity extends Entity {
                         explosionPos.x(), explosionPos.y(), explosionPos.z(),
                         2.35F, false, Level.ExplosionInteraction.BLOCK,
                         explosionParticle, explosionParticle,
-                        WeightedList.<ExplosionParticleInfo>builder()
-                                .add(new ExplosionParticleInfo(ParticleTypes.SMOKE, 1F, 0.7F))
-                                .build(),
-                        level.registryAccess().lookupOrThrow(Registries.SOUND_EVENT).wrapAsHolder(SoundEvents.EMPTY)
+                        level.registryAccess().registryOrThrow(Registries.SOUND_EVENT).wrapAsHolder(SoundEvents.EMPTY)
                 );
                 this.explode();
             }
@@ -133,32 +127,32 @@ public class PrimedIgniteEntity extends Entity {
     }
 
     @Override
-    public boolean canBeCollidedWith(@Nullable Entity entity) {
+    public boolean canBeCollidedWith() {
         return true;
     }
 
     @Override
-    public boolean hurtServer(ServerLevel serverLevel, DamageSource damageSource, float f) {
+    public boolean hurt(DamageSource damageSource, float f) {
         return false;
     }
 
     @Override
-    public boolean mayInteract(ServerLevel serverLevel, BlockPos blockPos) {
+    public boolean mayInteract(Level level, BlockPos blockPos) {
         return false;
     }
 
     @Override
-    protected void readAdditionalSaveData(ValueInput valueInput) {
-        this.setBlockState(valueInput.read(BLOCKSTATE_KEY, BlockState.CODEC).orElse(CDBlocks.IGNITE.defaultBlockState()));
-        this.setFuseTime(valueInput.getIntOr(FUSE_TIME_KEY, 0));
-        this.explosionChainIndex = valueInput.getIntOr(EXPLOSION_CHAIN_INDEX_KEY, 0);
+    protected void readAdditionalSaveData(CompoundTag compoundTag) {
+        this.setBlockState(NbtUtils.readBlockState(this.registryAccess().lookupOrThrow(Registries.BLOCK), compoundTag));
+        this.setFuseTime(compoundTag.getInt(FUSE_TIME_KEY));
+        this.explosionChainIndex = compoundTag.getInt(EXPLOSION_CHAIN_INDEX_KEY);
     }
 
     @Override
-    protected void addAdditionalSaveData(ValueOutput valueOutput) {
-        valueOutput.store(BLOCKSTATE_KEY, BlockState.CODEC, this.getBlockState());
-        valueOutput.putInt(FUSE_TIME_KEY, this.getFuseTime());
-        valueOutput.putInt(EXPLOSION_CHAIN_INDEX_KEY, this.explosionChainIndex);
+    protected void addAdditionalSaveData(CompoundTag compoundTag) {
+        compoundTag.put(BLOCKSTATE_KEY, NbtUtils.writeBlockState(blockState));
+        compoundTag.putInt(FUSE_TIME_KEY, this.getFuseTime());
+        compoundTag.putInt(EXPLOSION_CHAIN_INDEX_KEY, this.explosionChainIndex);
     }
 
     @Override

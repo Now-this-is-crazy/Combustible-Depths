@@ -45,10 +45,10 @@ public class CDBlocks {
 
     public static Block register(String id, Function<BlockBehaviour.Properties, Block> blockFunction, BlockBehaviour.Properties properties) {
         ResourceKey<Block> blockKey = ResourceKey.create(Registries.BLOCK, CombustibleDepths.id(id));
-        Block block = Registry.register(BuiltInRegistries.BLOCK, blockKey, blockFunction.apply(properties.setId(blockKey)));
+        Block block = Registry.register(BuiltInRegistries.BLOCK, blockKey, blockFunction.apply(properties));
 
         ResourceKey<Item> itemKey = ResourceKey.create(Registries.ITEM, CombustibleDepths.id(id));
-        Registry.register(BuiltInRegistries.ITEM, itemKey, new BlockItem(block, new Item.Properties().setId(itemKey)));
+        Registry.register(BuiltInRegistries.ITEM, itemKey, new BlockItem(block, new Item.Properties()));
         return block;
     }
 }

@@ -4,11 +4,12 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
 import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ItemStack;
@@ -26,6 +27,7 @@ import powercyphe.combustible_depths.common.registry.CDBlocks;
 import powercyphe.combustible_depths.common.registry.CDParticles;
 import powercyphe.combustible_depths.common.registry.CDSounds;
 import powercyphe.combustible_depths.common.registry.CDTags;
+import powercyphe.combustible_depths.mixin.accessor.BlockStateBaseAccessor;
 
 public class IgniteBlock extends RotatedPillarBlock {
     public static final IntegerProperty EXPLOSION_CHAIN_INDEX = IntegerProperty.create("explosion_chain_index", 0, PrimedIgniteEntity.EXPLOSION_CHAIN_INDEX_MAX);
@@ -53,12 +55,12 @@ public class IgniteBlock extends RotatedPillarBlock {
     }
 
     @Override
-    protected InteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos blockPos, Player player, InteractionHand hand, BlockHitResult blockHitResult) {
+    protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos blockPos, Player player, InteractionHand hand, BlockHitResult blockHitResult) {
         if (stack.is(CDTags.IGNITES_IGNITE)) {
             activate(level, state, blockPos, 0);
 
             level.playSound(player, blockPos, CDSounds.IGNITE_IGNITE.value(), SoundSource.BLOCKS, 0.5F, 1F);
-            return InteractionResult.SUCCESS;
+            return ItemInteractionResult.SUCCESS;
         }
 
         return super.useItemOn(stack, state, level, blockPos, player, hand, blockHitResult);
@@ -76,7 +78,7 @@ public class IgniteBlock extends RotatedPillarBlock {
     @Override
     public void attack(BlockState state, Level level, BlockPos blockPos, Player player) {
         ItemStack heldItem = player.getMainHandItem();
-        Holder<Enchantment> silkTouch = level.registryAccess().getOrThrow(Enchantments.SILK_TOUCH);
+        Holder<Enchantment> silkTouch = level.registryAccess().lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(Enchantments.SILK_TOUCH);
 
         if (heldItem.getEnchantments().getLevel(silkTouch) <= 0) {
             activate(level, state, blockPos, 0);
@@ -85,7 +87,7 @@ public class IgniteBlock extends RotatedPillarBlock {
 
     @Override
     protected boolean skipRendering(BlockState state, BlockState adjacentState, Direction direction) {
-        return adjacentState.isSolidRender();
+        return ((BlockStateBaseAccessor) adjacentState).combustible_depths$getCache().solidRender;
     }
 
     public static void activate(Level level, BlockState state, BlockPos blockPos, int explosionChainIndex) {
