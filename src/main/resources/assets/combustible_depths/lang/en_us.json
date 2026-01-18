@@ -7,5 +7,7 @@
 
   "subtitles.combustible_depths.ignite.ignite": "Ignite ignites",
   "subtitles.combustible_depths.ignite.charge": "Ignite charges",
-  "subtitles.combustible_depths.ignite.explode": "Ignite explodes"
+  "subtitles.combustible_depths.ignite.explode": "Ignite explodes",
+
+  "entity.combustible_depths.primed_ignite": "Primed Ignite"
 }
