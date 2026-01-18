@@ -1,0 +1,13 @@
+{
+  "item.combustible_depths.ignite": "Шрапнит",
+  "item.combustible_depths.soul_ignite": "Шрапнит душ",
+
+  "block.combustible_depths.ignite": "Шрапнит",
+  "block.combustible_depths.soul_ignite": "Шрапнит душ",
+
+  "subtitles.combustible_depths.ignite.ignite": "Шрапнит шипит",
+  "subtitles.combustible_depths.ignite.charge": "Шрапнит заряжается",
+  "subtitles.combustible_depths.ignite.explode": "Взрыв шрапнита",
+
+  "modmenu.descriptionTranslation.combustible_depths": "Мод добавляет два новых взрывоопасных блока в Незер, делая добычу незерита более увлекательной."
+}
