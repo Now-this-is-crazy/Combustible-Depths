@@ -1,0 +1,10 @@
+{
+  "block.combustible_depths.ignite": "Ignit",
+  "block.combustible_depths.soul_ignite": "Seelenignit",
+
+  "subtitles.combustible_depths.ignite.ignite": "Ignit zündet",
+  "subtitles.combustible_depths.ignite.charge": "Ignit lädt auf",
+  "subtitles.combustible_depths.ignite.explode": "Ignit explodiert",
+
+  "entity.combustible_depths.primed_ignite": "Gezündetes Ignit"
+}

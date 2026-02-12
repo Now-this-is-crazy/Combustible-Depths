@@ -48,7 +48,7 @@ public class CDBlocks {
         Block block = Registry.register(BuiltInRegistries.BLOCK, blockKey, blockFunction.apply(properties.setId(blockKey)));
 
         ResourceKey<Item> itemKey = ResourceKey.create(Registries.ITEM, CombustibleDepths.id(id));
-        Registry.register(BuiltInRegistries.ITEM, itemKey, new BlockItem(block, new Item.Properties().setId(itemKey)));
+        Registry.register(BuiltInRegistries.ITEM, itemKey, new BlockItem(block, new Item.Properties().useBlockDescriptionPrefix().setId(itemKey)));
         return block;
     }
 }
