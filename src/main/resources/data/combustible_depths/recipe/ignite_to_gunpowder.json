@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    "#combustible_depths:ignite"
+    {
+      "tag": "combustible_depths:ignite"
+    }
   ],
   "result": {
     "id": "minecraft:gunpowder",

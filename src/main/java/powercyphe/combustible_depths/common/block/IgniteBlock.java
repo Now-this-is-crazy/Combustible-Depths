@@ -87,7 +87,8 @@ public class IgniteBlock extends RotatedPillarBlock {
 
     @Override
     protected boolean skipRendering(BlockState state, BlockState adjacentState, Direction direction) {
-        return ((BlockStateBaseAccessor) adjacentState).combustible_depths$getCache().solidRender;
+        BlockStateBaseAccessor accessor = (BlockStateBaseAccessor) adjacentState;
+        return accessor != null ? accessor.combustible_depths$getCache().solidRender : super.skipRendering(state, adjacentState, direction);
     }
 
     public static void activate(Level level, BlockState state, BlockPos blockPos, int explosionChainIndex) {

@@ -7,9 +7,15 @@
     "FGF"
   ],
   "key": {
-    "F": "minecraft:flint",
-    "G": "minecraft:gunpowder",
-    "C": "minecraft:fire_charge"
+    "F": {
+      "item": "minecraft:flint"
+    },
+    "G": {
+      "item": "minecraft:gunpowder"
+    },
+    "C": {
+      "item": "minecraft:fire_charge"
+    }
   },
   "result": {
     "id": "combustible_depths:ignite",

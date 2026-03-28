@@ -7,9 +7,15 @@
     "SGS"
   ],
   "key": {
-    "S": "minecraft:soul_sand",
-    "G": "minecraft:gunpowder",
-    "C": "minecraft:fire_charge"
+    "S": {
+      "item": "minecraft:soul_sand"
+    },
+    "G": {
+      "item": "minecraft:gunpowder"
+    },
+    "C": {
+      "item": "minecraft:fire_charge"
+    }
   },
   "result": {
     "id": "combustible_depths:soul_ignite",
