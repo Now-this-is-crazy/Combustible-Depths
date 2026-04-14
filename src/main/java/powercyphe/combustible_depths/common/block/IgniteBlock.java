@@ -27,7 +27,6 @@ import powercyphe.combustible_depths.common.registry.CDBlocks;
 import powercyphe.combustible_depths.common.registry.CDParticles;
 import powercyphe.combustible_depths.common.registry.CDSounds;
 import powercyphe.combustible_depths.common.registry.CDTags;
-import powercyphe.combustible_depths.mixin.accessor.BlockStateBaseAccessor;
 
 public class IgniteBlock extends RotatedPillarBlock {
     public static final IntegerProperty EXPLOSION_CHAIN_INDEX = IntegerProperty.create("explosion_chain_index", 0, PrimedIgniteEntity.EXPLOSION_CHAIN_INDEX_MAX);
@@ -83,12 +82,6 @@ public class IgniteBlock extends RotatedPillarBlock {
         if (heldItem.getEnchantments().getLevel(silkTouch) <= 0) {
             activate(level, state, blockPos, 0);
         }
-    }
-
-    @Override
-    protected boolean skipRendering(BlockState state, BlockState adjacentState, Direction direction) {
-        BlockStateBaseAccessor accessor = (BlockStateBaseAccessor) adjacentState;
-        return accessor != null ? accessor.combustible_depths$getCache().solidRender : super.skipRendering(state, adjacentState, direction);
     }
 
     public static void activate(Level level, BlockState state, BlockPos blockPos, int explosionChainIndex) {
