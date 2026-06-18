@@ -2,9 +2,13 @@ package powercyphe.combustible_depths.client.render;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.SubmitNodeCollector;
+import net.minecraft.client.renderer.block.BlockModelRenderState;
+import net.minecraft.client.renderer.block.BlockModelResolver;
+import net.minecraft.client.renderer.block.model.BlockDisplayContext;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.client.renderer.state.CameraRenderState;
+import net.minecraft.client.renderer.rendertype.RenderTypes;
+import net.minecraft.client.renderer.state.level.CameraRenderState;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.util.Mth;
 import net.minecraft.world.phys.Vec3;
@@ -12,8 +16,10 @@ import powercyphe.combustible_depths.client.render.state.PrimedIgniteEntityRende
 import powercyphe.combustible_depths.common.entity.PrimedIgniteEntity;
 
 public class PrimedIgniteEntityRenderer extends EntityRenderer<PrimedIgniteEntity, PrimedIgniteEntityRenderState> {
+    final BlockModelResolver blockModelResolver;
     public PrimedIgniteEntityRenderer(EntityRendererProvider.Context context) {
         super(context);
+        this.blockModelResolver = context.getBlockModelResolver();
     }
 
     @Override
@@ -24,7 +30,7 @@ public class PrimedIgniteEntityRenderer extends EntityRenderer<PrimedIgniteEntit
     @Override
     public void extractRenderState(PrimedIgniteEntity entity, PrimedIgniteEntityRenderState state, float tickProgress) {
         super.extractRenderState(entity, state, tickProgress);
-        state.blockState = entity.getBlockState();
+        this.blockModelResolver.update(state.blockState, entity.getBlockState(), BlockDisplayContext.create());
         state.fuseProgress = Mth.lerp(tickProgress, entity.getFuseTime(), entity.getFuseTime()+1) / (float) PrimedIgniteEntity.FUSE_TIME_MAX;
 
         if (state.fuseProgress - 0.3F > 0) {
@@ -42,7 +48,7 @@ public class PrimedIgniteEntityRenderer extends EntityRenderer<PrimedIgniteEntit
     }
 
     @Override
-    public void submit(PrimedIgniteEntityRenderState state, PoseStack poseStack, SubmitNodeCollector submitNodeCollector, CameraRenderState cameraRenderState) {
+    public void submit(PrimedIgniteEntityRenderState state, PoseStack poseStack, SubmitNodeCollector submitNodeCollector, CameraRenderState camera) {
         poseStack.pushPose();
 
         float size = 1 + Math.max(0F, state.fuseProgress - 0.9F) * 4F;
@@ -52,10 +58,9 @@ public class PrimedIgniteEntityRenderer extends EntityRenderer<PrimedIgniteEntit
         poseStack.translate(state.shakiness.x(), state.shakiness.y(), state.shakiness.z());
 
         float overlayU = Math.max(0, state.fuseProgress - 0.5F) * 2;
-        submitNodeCollector.submitBlock(poseStack, state.blockState, state.lightCoords, overlayU > 0
-                ? OverlayTexture.pack(OverlayTexture.u(overlayU), 10) : OverlayTexture.NO_OVERLAY, 0);
+        state.blockState.submit(poseStack, submitNodeCollector, state.lightCoords, overlayU > 0 ? OverlayTexture.pack(OverlayTexture.u(overlayU), 10) : OverlayTexture.NO_OVERLAY, state.outlineColor);
 
         poseStack.popPose();
-        super.submit(state, poseStack, submitNodeCollector, cameraRenderState);
+        super.submit(state, poseStack, submitNodeCollector, camera);
     }
 }

@@ -1,6 +1,6 @@
 package powercyphe.combustible_depths.common.registry;
 
-import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
+import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -35,9 +35,9 @@ public class CDBlocks {
     );
 
     public static void init() {
-        ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.NATURAL_BLOCKS)
+        CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.NATURAL_BLOCKS)
                 .register(entries ->
-                        entries.addAfter(Blocks.SMOOTH_BASALT,
+                        entries.insertAfter(Blocks.SMOOTH_BASALT,
                                 IGNITE,
                                 SOUL_IGNITE
                 ));

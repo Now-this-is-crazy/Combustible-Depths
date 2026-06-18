@@ -74,7 +74,7 @@ public record IgniteExplosionPayload(BlockState state, Vec3 pos, int explosionCh
 
         private boolean isFarAwayFromCamera(Vec3 pos) {
             Minecraft minecraft = Minecraft.getInstance();
-            return minecraft.gameRenderer.getMainCamera().position().distanceToSqr(pos.x(), pos.y(), pos.z()) >= 256;
+            return minecraft.gameRenderer.mainCamera().position().distanceToSqr(pos.x(), pos.y(), pos.z()) >= 256;
         }
     }
 }

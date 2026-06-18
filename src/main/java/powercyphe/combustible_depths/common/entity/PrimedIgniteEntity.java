@@ -54,7 +54,7 @@ public class PrimedIgniteEntity extends Entity {
 
     public PrimedIgniteEntity(Level level, BlockPos blockPos, BlockState state, int explosionChainIndex) {
         super(CDEntities.PRIMED_IGNITE, level);
-        this.setPos(blockPos.getBottomCenter());
+        this.setPos(Vec3.atBottomCenterOf(blockPos));
         this.setNoGravity(true);
         this.setBlockState(state);
         this.explosionChainIndex = explosionChainIndex;

@@ -17,7 +17,7 @@ public class CombustibleDepths implements ModInitializer {
         CDFeatures.init();
         CDParticles.init();
 
-        PayloadTypeRegistry.playS2C().register(IgniteExplosionPayload.TYPE, IgniteExplosionPayload.CODEC);
+        PayloadTypeRegistry.clientboundPlay().register(IgniteExplosionPayload.TYPE, IgniteExplosionPayload.CODEC);
     }
 
     public static Identifier id(String path) {
