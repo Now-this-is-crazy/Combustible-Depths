@@ -4,7 +4,7 @@
   "mixinextras": {
     "minVersion": "0.5.0"
   },
-  "package": "powercyphe.combustible_depths.mixin",
+  "package": "dev.powercyphe.combustible_depths.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
   ],

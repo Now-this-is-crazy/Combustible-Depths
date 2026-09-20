@@ -17,10 +17,13 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "powercyphe.combustible_depths.common.CombustibleDepths"
+      "dev.powercyphe.combustible_depths.common.CombustibleDepths"
     ],
     "client": [
-      "powercyphe.combustible_depths.client.CombustibleDepthsClient"
+      "dev.powercyphe.combustible_depths.client.CombustibleDepthsClient"
+    ],
+    "fabric-datagen": [
+      "dev.powercyphe.combustible_depths.common.datagen.CDDatagen"
     ]
   },
   "mixins": [

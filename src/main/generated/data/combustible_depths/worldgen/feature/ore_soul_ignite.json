@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:ore",
+  "discard_chance_on_air_exposure": 0.0,
+  "size": 9,
+  "targets": [
+    {
+      "state": "combustible_depths:soul_ignite",
+      "target": {
+        "predicate_type": "minecraft:any_of",
+        "rules": [
+          {
+            "predicate_type": "minecraft:tag_match",
+            "tag": "combustible_depths:soul_ignite_replaceable"
+          }
+        ]
+      }
+    }
+  ]
+}

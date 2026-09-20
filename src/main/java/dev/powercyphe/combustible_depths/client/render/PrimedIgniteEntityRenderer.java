@@ -1,0 +1,70 @@
+package dev.powercyphe.combustible_depths.client.render;
+
+import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.renderer.SubmitNodeCollector;
+import net.minecraft.client.renderer.block.BlockModelResolver;
+import net.minecraft.client.renderer.block.model.BlockDisplayContext;
+import net.minecraft.client.renderer.entity.EntityRenderer;
+import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.client.renderer.state.level.CameraRenderState;
+import net.minecraft.client.renderer.texture.OverlayTexture;
+import net.minecraft.core.BlockPos;
+import net.minecraft.util.Mth;
+import net.minecraft.world.phys.Vec3;
+import dev.powercyphe.combustible_depths.client.render.state.PrimedIgniteEntityRenderState;
+import dev.powercyphe.combustible_depths.common.entity.PrimedIgniteEntity;
+
+public class PrimedIgniteEntityRenderer extends EntityRenderer<PrimedIgniteEntity, PrimedIgniteEntityRenderState> {
+    final BlockModelResolver blockModelResolver;
+    public PrimedIgniteEntityRenderer(EntityRendererProvider.Context context) {
+        super(context);
+        this.blockModelResolver = context.getBlockModelResolver();
+    }
+
+    @Override
+    public PrimedIgniteEntityRenderState createRenderState() {
+        return new PrimedIgniteEntityRenderState();
+    }
+
+    @Override
+    public void extractRenderState(PrimedIgniteEntity entity, PrimedIgniteEntityRenderState state, float tickProgress) {
+        super.extractRenderState(entity, state, tickProgress);
+        this.blockModelResolver.update(state.blockState, entity.getBlockState(), BlockDisplayContext.create());
+        state.fuseProgress = Mth.lerp(tickProgress, entity.getFuseTime(), entity.getFuseTime()+1) / (float) PrimedIgniteEntity.FUSE_TIME_MAX;
+
+        if (state.fuseProgress - 0.3F > 0) {
+            float progress = (state.fuseProgress - 0.3F) / 0.7F;
+            double sin = Math.sin(progress * Math.PI * 360) * 0.1F;
+
+            state.shakiness = new Vec3(
+                    entity.shakiness.x() * sin,
+                    entity.shakiness.y() * sin,
+                    entity.shakiness.z() * sin
+            );
+        } else {
+            state.shakiness = Vec3.ZERO;
+        }
+    }
+
+    @Override
+    public void submit(PrimedIgniteEntityRenderState state, PoseStack poseStack, SubmitNodeCollector submitNodeCollector, CameraRenderState camera) {
+        poseStack.pushPose();
+
+        float size = 1 + Math.max(0F, state.fuseProgress - 0.9F) * 4F;
+        poseStack.translate(-0.5 - (size - 1) / 2, -(size - 1) / 2, -0.5 - (size - 1) / 2);
+        poseStack.scale(size, size, size);
+
+        poseStack.translate(state.shakiness.x(), state.shakiness.y(), state.shakiness.z());
+
+        float overlayU = Math.max(0, state.fuseProgress - 0.5F) * 2;
+        state.blockState.submit(poseStack, submitNodeCollector, state.lightCoords, overlayU > 0 ? OverlayTexture.pack(OverlayTexture.u(overlayU), 10) : OverlayTexture.NO_OVERLAY, state.outlineColor);
+
+        poseStack.popPose();
+        super.submit(state, poseStack, submitNodeCollector, camera);
+    }
+
+    @Override
+    protected int getBlockLightLevel(PrimedIgniteEntity entity, BlockPos blockPos) {
+        return Math.max(5, super.getBlockLightLevel(entity, blockPos));
+    }
+}

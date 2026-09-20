@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "C": "minecraft:fire_charge",
+    "F": "#combustible_depths:ignite_crafting_materials",
+    "G": "minecraft:gunpowder"
+  },
+  "pattern": [
+    "FGF",
+    "GCG",
+    "FGF"
+  ],
+  "result": {
+    "count": 2,
+    "id": "combustible_depths:ignite"
+  }
+}
